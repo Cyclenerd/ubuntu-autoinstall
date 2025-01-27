@@ -1,0 +1,57 @@
+#cloud-config
+# Ubuntu autoinstall configuration
+# https://canonical-subiquity.readthedocs-hosted.com/en/latest/reference/autoinstall-reference.html
+autoinstall:
+  version: 1
+  user-data:
+     users:
+       - name: ubuntu
+         gecos: 'Ubuntu User'
+         passwd: '$6$3eD1ISX/pmIHZ68g$rb7XMHCmzBSWtMyIZJhFjoi/BiIx66PumsEBAbE49pHJPSanLJ.LMUZ4aPTCCIO5E4WrBlOCLqj0RHqUneAXU.'
+         groups: adm, dialout, cdrom, floppy, audio, dip, video, plugdev, lxd, netdev, sudo
+         shell: /bin/bash
+         lock_passwd: False
+         sudo: ALL=(ALL) NOPASSWD:ALL
+  # install drivers as suggested by `ubuntu-drivers`
+  drivers:
+    install: true
+  # configuration for SSH with password access
+  ssh:
+    install-server: true
+    allow-pw: true
+  storage:
+    layout:
+      name: direct
+      reset-partition: true
+  packages:
+    - amd64-microcode
+    - apt-transport-https
+    - apt-utils
+    - build-essential
+    - ca-certificates
+    - coreutils
+    - curl
+    - dnsutils
+    - git
+    - gpg
+    - gpg-agent
+    - htop
+    - lsb-release
+    - mutt
+    - nano
+    - net-tools
+    - openssh-client
+    - python3-crcmod
+    - python3-openssl
+    - python3-pip
+    - python3-venv
+    - screen
+    - software-properties-common
+    - tar
+    - unzip
+    - wget
+    - zip
+  # updates from both the security and updates packets are installed
+  updates: all
+
+# EOF
