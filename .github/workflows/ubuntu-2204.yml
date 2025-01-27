@@ -8,7 +8,7 @@ env:
 
 jobs:
   test:
-    name: CI/CD Test
+    name: Create ISO
     # https://github.com/actions/virtual-environments/
     runs-on: ubuntu-22.04
     steps:
@@ -32,10 +32,10 @@ jobs:
         run: |
           git clone "https://github.com/mwhudson/livefs-editor.git" && \
           cd livefs-editor && \
-          sudo python3 -m pip install . --break-system-packages
+          sudo python3 -m pip install .
 
       - name: Download ISO
-        run: curl "$UBUNTU_ISO_URL" -o ubuntu.iso
+        run: curl -L "$UBUNTU_ISO_URL" -o ubuntu.iso
 
       - name: Add autoinstall.yaml
         run: sudo livefs-edit ubuntu.iso ubuntu-autoinstall.iso --add-autoinstall-config autoinstall.yaml
