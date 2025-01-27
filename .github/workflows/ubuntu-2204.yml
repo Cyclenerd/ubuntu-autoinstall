@@ -47,4 +47,4 @@ jobs:
           name: ubuntu-autoinstall.iso
           path: 'ubuntu-autoinstall.iso'
           retention-days: 3
-          compression-level: 0
+          compression-level: 9 # maximum compression
