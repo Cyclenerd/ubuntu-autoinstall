@@ -2,16 +2,18 @@
 
 [![Badge: Ubuntu](https://img.shields.io/badge/Ubuntu-E95420.svg?logo=ubuntu&logoColor=white)](#readme)
 [![Badge: GitHub](https://img.shields.io/badge/GitHub-181717.svg?logo=github&logoColor=white)](#readme)
-[![Badge: License](https://img.shields.io/github/license/cyclenerd/template)](https://github.com/Cyclenerd/ubuntu-autoinstall/blob/master/LICENSE)
+[![Badge: License](https://img.shields.io/github/license/cyclenerd/ubuntu-autoinstall)](https://github.com/Cyclenerd/ubuntu-autoinstall/blob/master/LICENSE)
 
 This repository provides GitHub Actions workflows to create personalized Ubuntu installation images (ISO) with your preferred configurations and packages pre-installed.
 
 > [!CAUTION]
 > **WARNING: Data Loss Risk!**
+>
 > This installation image will:
 > * Automatically partition and format storage devices
 > * Delete ALL existing data without prompting
 > * Proceed without user intervention
+>
 > Backup your data before proceeding!
 
 ## Quick Start
@@ -19,6 +21,7 @@ This repository provides GitHub Actions workflows to create personalized Ubuntu 
 1. Clone this repository.
 1. Customize `autoinstall.yaml`.
 1. Let GitHub Actions build your ISO.
+1. Download artifact `ubuntu-autoinstall.iso.zip`
 1. Flash ISO to USB flash drive using with [balenaEtcher](https://etcher.balena.io/) or `dd`.
 
 ## Features
