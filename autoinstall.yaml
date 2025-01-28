@@ -34,7 +34,7 @@ autoinstall:
     - dnsutils
     - git
     - gpg
-    - gpg-agent
+    - gnupg-agent
     - htop
     - lsb-release
     - mutt
