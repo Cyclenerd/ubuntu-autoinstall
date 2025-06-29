@@ -1,0 +1,50 @@
+name: "Ubuntu 24.04"
+
+on:
+  workflow_dispatch:
+
+env:
+  UBUNTU_ISO_URL: "https://www.releases.ubuntu.com/24.04/ubuntu-24.04.2-live-server-amd64.iso"
+
+jobs:
+  test:
+    name: Create ISO
+    # https://github.com/actions/virtual-environments/
+    runs-on: ubuntu-24.04
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get install \
+            curl \
+            git \
+            gpg \
+            liblz4-tool \
+            python3-debian \
+            python3-pip \
+            squashfs-tools \
+            xorriso
+
+      - name: Install tool to edit Ubuntu ISOs
+        run: |
+          git clone "https://github.com/mwhudson/livefs-editor.git" && \
+          cd livefs-editor && \
+          sudo python3 -m pip install .
+
+      - name: Download ISO
+        run: curl -L "$UBUNTU_ISO_URL" -o ubuntu.iso
+
+      - name: Add autoinstall.yaml
+        run: sudo livefs-edit ubuntu.iso "ubuntu-24.04-autoinstall.iso" --add-autoinstall-config autoinstall.yaml
+
+      # https://github.com/marketplace/actions/upload-a-build-artifact
+      - name: Upload ISO
+        uses: actions/upload-artifact@v4
+        with:
+          name: ubuntu-24.04-autoinstall.iso
+          path: ubuntu-24.04-autoinstall.iso
+          retention-days: 3
+          compression-level: 9 # maximum compression
