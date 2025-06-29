@@ -5,6 +5,7 @@ on:
 
 env:
   UBUNTU_ISO_URL: "https://www.releases.ubuntu.com/22.04/ubuntu-22.04.5-live-server-amd64.iso"
+  UBUNTU_VERSION: "22.04"
 
 jobs:
   test:
@@ -38,13 +39,13 @@ jobs:
         run: curl -L "$UBUNTU_ISO_URL" -o ubuntu.iso
 
       - name: Add autoinstall.yaml
-        run: sudo livefs-edit ubuntu.iso ubuntu-autoinstall.iso --add-autoinstall-config autoinstall.yaml
+        run: sudo livefs-edit ubuntu.iso "ubuntu-$UBUNTU_VERSION-autoinstall.iso" --add-autoinstall-config autoinstall.yaml
 
       # https://github.com/marketplace/actions/upload-a-build-artifact
       - name: Upload ISO
         uses: actions/upload-artifact@v4
         with:
-          name: ubuntu-autoinstall.iso
-          path: 'ubuntu-autoinstall.iso'
+          name: "ubuntu-$UBUNTU_VERSION-autoinstall.iso"
+          path: "ubuntu-$UBUNTU_VERSION-autoinstall.iso"
           retention-days: 3
           compression-level: 9 # maximum compression
